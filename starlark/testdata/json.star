@@ -1,8 +1,9 @@
 # Tests of json module.
 # option:float
 
-load("assert.star", "assert")
-load("json.star", "json")
+load("assert.star")
+load(lib="json.star")
+json = lib.json
 
 assert.eq(dir(json), ["decode", "encode", "indent"])
 

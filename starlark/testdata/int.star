@@ -1,7 +1,7 @@
 # Tests of Starlark 'int'
 # option:float
 
-load("assert.star", "assert")
+load("assert.star")
 
 # basic arithmetic
 assert.eq(0 - 1, -1)

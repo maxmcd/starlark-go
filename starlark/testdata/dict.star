@@ -1,7 +1,8 @@
 # Tests of Starlark 'dict'
 # option:nesteddef
 
-load("assert.star", "assert", "freeze")
+load("assert.star")
+freeze = assert.freeze
 
 # literals
 assert.eq({}, {})

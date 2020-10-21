@@ -1,6 +1,6 @@
 # Tests of Starlark 'tuple'
 
-load("assert.star", "assert")
+load("assert.star")
 
 # literal
 assert.eq((), ())

@@ -1,10 +1,10 @@
 # Tests of Module.
 
-load("assert.star", "assert")
+load("assert.star")
 
 assert.eq(type(assert), "module")
-assert.eq(str(assert), '<module "assert">')
-assert.eq(dir(assert), ["contains", "eq", "fail", "fails", "lt", "ne", "true"])
+assert.eq(str(assert), '<module "assert.star">')
+assert.eq(dir(assert), ["contains", "eq", "fail",  "fails", "freeze", "lt", "ne", "true"])
 assert.fails(lambda : {assert: None}, "unhashable: module")
 
 def assignfield():

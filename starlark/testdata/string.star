@@ -1,7 +1,8 @@
 # Tests of Starlark 'string'
 # option:float option:set
 
-load("assert.star", "assert")
+load("assert.star")
+
 
 # raw string literals:
 assert.eq(r'a\bc', "a\\bc")
