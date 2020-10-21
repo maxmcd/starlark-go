@@ -1,8 +1,7 @@
 # Tests of Starlark built-in functions
 # option:float option:set
 
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 # len
 assert.eq(len([1, 2, 3]), 3)

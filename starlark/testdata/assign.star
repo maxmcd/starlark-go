@@ -3,8 +3,7 @@
 # This is a "chunked" file: each "---" effectively starts a new file.
 
 # tuple assignment
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 () = () # empty ok
 
@@ -32,8 +31,7 @@ assert.eq(c, 3)
 () = (1, 2) ### "too many values to unpack"
 ---
 # list assignment
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 [] = [] # empty ok
 
@@ -61,8 +59,7 @@ assert.eq(c, 3)
 [] = [1, 2] ### "too many values to unpack"
 ---
 # list-tuple assignment
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 
 # empty ok
@@ -96,8 +93,7 @@ assert.eq(n, 4)
 ---
 # option:nesteddef
 # misc assignment
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 
 def assignment():
@@ -119,8 +115,7 @@ assignment()
 ---
 # augmented assignment
 
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 
 def f():
@@ -134,8 +129,7 @@ f()
 ---
 # effects of evaluating LHS occur only once
 
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 
 count = [0] # count[0] is the number of calls to f
@@ -153,8 +147,7 @@ assert.eq(count[0], 1) # f was called only once
 ---
 # Order of evaluation.
 
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 
 calls = []
@@ -190,8 +183,7 @@ g = 1
 ---
 # option:nesteddef
 # Free variables are captured by reference, so this is ok.
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 def f():
    def g():
@@ -202,8 +194,7 @@ def f():
 assert.eq(f(), 1)
 
 ---
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 printok = [False]
 
@@ -233,8 +224,7 @@ f()
 z += 3 ### "global variable z referenced before assignment"
 
 ---
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 # It's ok to define a global that shadows a built-in...
 list = []
@@ -250,8 +240,7 @@ tuple = ()
 # option:float option:set
 # Same as above, but set and float are dialect-specific;
 # we shouldn't notice any difference.
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 float = 1.0
 assert.eq(type(float), "float")
@@ -274,8 +263,7 @@ x = [1, 2]
 _ = [x for _ in [3] for x in x] ### "local variable x referenced before assignment"
 
 ---
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 # assign singleton sequence to 1-tuple
 (x,) = (1,)
@@ -295,9 +283,8 @@ assert.eq(a, 1)
 
 ---
 # assignment to/from fields.
-load(lib="assert.star")
-assert = lib.assert
-freeze = lib.freeze
+load("assert.star")
+freeze = assert.freeze
 
 hf = hasfields()
 hf.x = 1
@@ -315,8 +302,7 @@ assert.fails(lambda: setY(hf), "cannot set field on a frozen hasfields")
 
 ---
 # destructuring assignment in a for loop.
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 def f():
   res = []
@@ -335,8 +321,7 @@ assert.eq(g(), {"one": 1, "two": 2})
 ---
 # parenthesized LHS in augmented assignment (success)
 # option:globalreassign
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 a = 5
 (a) += 3
@@ -370,13 +355,11 @@ load("assert.star")
 
 ---
 def f(): assert.eq(1, 1) # forward ref OK
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 f()
 
 ---
 # option:loadbindsglobally
 def f(): assert.eq(1, 1) # forward ref OK
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 f()

@@ -1,9 +1,7 @@
 # Tests of Starlark 'struct' extension.
 # This is not a standard feature and the Go and Starlark APIs may yet change.
 
-load(lib="assert.star")
-assert = lib.assert
-
+load("assert.star")
 
 assert.eq(str(struct), "<built-in function struct>")
 

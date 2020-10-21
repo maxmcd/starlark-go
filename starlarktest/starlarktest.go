@@ -25,6 +25,43 @@ import (
 	"go.starlark.net/starlarkstruct"
 )
 
+var assertModule = `# Predeclared built-ins for this module:
+#
+# error(msg): report an error in Go's test framework without halting execution.
+#  This is distinct from the built-in fail function, which halts execution.
+# catch(f): evaluate f() and returns its evaluation error message, if any
+# matches(str, pattern): report whether str matches regular expression pattern.
+# module(**kwargs): a constructor for a module.
+# _freeze(x): freeze the value x and everything reachable from it.
+#
+# Clients may use these functions to define their own testing abstractions.
+def eq(x, y):
+    if x != y:
+        error("%r != %r" % (x, y))
+def ne(x, y):
+    if x == y:
+        error("%r == %r" % (x, y))
+def true(cond, msg = "assertion failed"):
+    if not cond:
+        error(msg)
+def lt(x, y):
+    if not (x < y):
+        error("%s is not less than %s" % (x, y))
+def contains(x, y):
+    if y not in x:
+        error("%s does not contain %s" % (x, y))
+def fails(f, pattern):
+    "assert_fails asserts that evaluation of f() fails with the specified error."
+    msg = catch(f)
+    if msg == None:
+        error("evaluation succeeded unexpectedly (want error matching %r)" % pattern)
+    elif not matches(pattern, msg):
+        error("regular expression (%s) did not match error (%s)" % (pattern, msg))
+freeze = _freeze  # an exported global whose value is the built-in freeze function
+
+fail = error
+`
+
 const localKey = "Reporter"
 
 // A Reporter is a value to which errors may be reported.
@@ -67,9 +104,8 @@ func LoadAssertModule() (starlark.StringDict, error) {
 			"module":  starlark.NewBuiltin("module", starlarkstruct.MakeModule),
 			"_freeze": starlark.NewBuiltin("freeze", freeze),
 		}
-		filename := DataFile("starlarktest", "assert.star")
 		thread := new(starlark.Thread)
-		assert, assertErr = starlark.ExecFile(thread, filename, nil, predeclared)
+		assert, assertErr = starlark.ExecFile(thread, "assert.star", assertModule, predeclared)
 	})
 	return assert, assertErr
 }

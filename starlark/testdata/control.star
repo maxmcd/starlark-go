@@ -1,7 +1,6 @@
 # Tests of Starlark control flow
 
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 def controlflow():
   # elif

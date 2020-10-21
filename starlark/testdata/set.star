@@ -15,8 +15,7 @@
 # - set += iterable, perhaps?
 # Test iterator invalidation.
 
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 
 # literals

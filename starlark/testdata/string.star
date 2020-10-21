@@ -1,8 +1,7 @@
 # Tests of Starlark 'string'
 # option:float option:set
 
-load(lib="assert.star")
-assert = lib.assert
+load("assert.star")
 
 
 # raw string literals:
