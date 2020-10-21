@@ -448,7 +448,7 @@ func TestParseErrors(t *testing.T) {
 // dataFile is the same as starlarktest.DataFile.
 // We make a copy to avoid a dependency cycle.
 var dataFile = func(pkgdir, filename string) string {
-	return filepath.Join(build.Default.GOPATH, "src/github.com/maxmcd/starlark-go", pkgdir, filename)
+	return filepath.Join(build.Default.GOPATH, "src/go.starlark.net", pkgdir, filename)
 }
 
 func BenchmarkParse(b *testing.B) {

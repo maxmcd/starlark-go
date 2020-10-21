@@ -567,6 +567,7 @@ func (r *resolver) stmt(stmt syntax.Stmt) {
 			r.errorf(stmt.Alias.NamePos, "load: empty identifier")
 		}
 		if stmt.Alias.Name[0] == '_' {
+			// TODO(maxmcd): Add more validation here
 			r.errorf(stmt.Alias.NamePos, "load: names with leading underscores are not exported: %s", stmt.Alias.Name)
 		}
 		if LoadBindsGlobally {
@@ -577,7 +578,6 @@ func (r *resolver) stmt(stmt syntax.Stmt) {
 			// as id.Binding may not be set yet.
 			r.errorf(stmt.Alias.NamePos, "cannot reassign top-level %s", stmt.Alias.Name)
 		}
-		// TODO (maxmcd)
 	default:
 		log.Panicf("unexpected stmt %T", stmt)
 	}

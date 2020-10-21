@@ -1207,10 +1207,6 @@ func (fcomp *fcomp) stmt(stmt syntax.Stmt) {
 		fcomp.block = fcomp.newBlock() // dead code
 
 	case *syntax.LoadStmt:
-		// TODO: maxmcd
-		// for i := range stmt.From {
-		// 	fcomp.string(stmt.From[i].Name)
-		// }
 		fcomp.string(stmt.Alias.Name)
 		module := stmt.Module.Value.(string)
 		fcomp.pcomp.prog.Loads = append(fcomp.pcomp.prog.Loads, Binding{
@@ -1221,11 +1217,6 @@ func (fcomp *fcomp) stmt(stmt syntax.Stmt) {
 		fcomp.setPos(stmt.Load)
 		fcomp.emit1(LOAD, uint32(0))
 		fcomp.set(stmt.Alias)
-		// fcomp.emit1(LOAD, uint32(len(stmt.From)))
-		// for i := range stmt.To {
-		// 	fcomp.set(stmt.To[len(stmt.To)-1-i])
-		// }
-
 	default:
 		start, _ := stmt.Span()
 		log.Panicf("%s: exec: unexpected statement %T", start, stmt)
